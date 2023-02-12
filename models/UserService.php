@@ -29,10 +29,7 @@ class UserService implements IUserService
         $this->users[] = $user;
         $string = json_encode($this->users);
         $result = file_put_contents($this->dbName, $string);
-        print_r($this->dbName);
-        print_r(PHP_EOL);
-        print_r($result);
-        if(!$result){
+        if($result){
             return $user;
         }
         return null;
