@@ -17,21 +17,22 @@ if ($_SESSION['user']) {
 <div class="container">
     <form action="" id="registrationForm">
         <label>Login</label>
-        <input type="text" name="login" id="login" placeholder="Enter Login" class="form-control" require><br>
-        <p class="msg-login-error none">Lorem ipsum.</p>
+        <input type="text" name="login" id="login" placeholder="Enter Login" class="form-control" require>
+        <p class="msg-login-error none">Lorem ipsum.</p><br>
         <label>Password</label>
-        <input type="password" name="password" id="password" placeholder="Enter password" class="form-control" require><br>
-        <p class="msg-password-error none">Lorem ipsum.</p>
+        <input type="password" name="password" id="password" placeholder="Enter password" class="form-control" require>
+        <p class="msg-password-error none">Lorem ipsum.</p><br>
         <label>Confirm Password</label>
-        <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirm password" class="form-control" require><br>
-        <p class="msg-confirm-password-error none">Lorem ipsum.</p>
+        <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirm password"
+               class="form-control" require>
+        <p class="msg-confirm-password-error none">Lorem ipsum.</p><br>
         <label>Email</label>
-        <input name="email" id="email" name="email" placeholder="email" class="form-control" require><br>
-        <p class="msg-email-error none">Lorem ipsum.</p>
+        <input name="email" id="email" name="email" placeholder="email" class="form-control" require>
+        <p class="msg-email-error none">Lorem ipsum.</p><br>
         <label>Name</label>
-        <input name="text" id="name" name="name" placeholder="Enter name" class="form-control" require><br>
-        <p class="msg-name-error none">Lorem ipsum.</p>
-        <button id="sendRegistration" type="button" name="button" class="btn btn-success">Send</button>
+        <input name="text" id="name" name="name" placeholder="Enter name" class="form-control" require>
+        <p class="msg-name-error none">Lorem ipsum.</p><br>
+        <button id="sendRegistration" type="button" name="button" class="btn">Send</button>
         <p><a href="authorization.php">Authorization</a></p>
         <p class="msg none"></p>
     </form>

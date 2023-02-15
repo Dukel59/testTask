@@ -36,9 +36,10 @@ input {
     outline: none;
 }
 
-button {
+.btn {
     padding: 10px;
     background: #e3e3e3;
+    cursor: pointer;
 }
 
 .error {

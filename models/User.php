@@ -4,7 +4,8 @@ namespace models;
 
 use JsonSerializable;
 
-class User implements JsonSerializable {
+class User implements JsonSerializable
+{
     private int $id;
     private string $login;
     private string $password;
@@ -14,52 +15,72 @@ class User implements JsonSerializable {
 
     public function __construct(int $id, string $login, string $password, string $email, string $name, string $sault = null)
     {
-        $sault? $this->sault = $sault : $this->generateSault();
+        $sault ? $this->sault = $sault : $this->generateSault();
         $this->id = $id;
         $this->login = $login;
         $this->email = $email;
         $this->name = $name;
-        $this->password =  $password;
-    }
-
-    public function getId(): int{
-        return $this->id;
-    }
-    public function setId(int $id): void{
-        $this->id = $id;
-    }
-    public function getLogin(): string{
-        return $this->login;
-    }
-    public function setLogin(string $login): void{
-        $this->login = $login;
-    }
-    public function getPassword(): string{
-        return $this->password;
-    }
-    public function setPassword(string $password): void{
         $this->password = $password;
     }
-    public function getEmail(): string{
-        return $this->email;
-    }
-    public function setEmail(string $email): void{
-        $this->email = $email;
-    }
-    public function getName(): string{
-        return $this->name;
-    }
-    public function setName(string $name): void{
-        $this->name = $name;
-    }
-    public function getSault (): string
+
+    public function getId(): int
     {
-        return $this->sault ;
+        return $this->id;
     }
 
-    public function setSault (string $sault): void
+    public function setId(int $id): void
     {
-        $this->sault  = $sault ;
+        $this->id = $id;
+    }
+
+    public function getLogin(): string
+    {
+        return $this->login;
+    }
+
+    public function setLogin(string $login): void
+    {
+        $this->login = $login;
+    }
+
+    public function getPassword(): string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): void
+    {
+        $this->password = $password;
+    }
+
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): void
+    {
+        $this->email = $email;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): void
+    {
+        $this->name = $name;
+    }
+
+    public function getSault(): string
+    {
+        return $this->sault;
+    }
+
+    public function setSault(string $sault): void
+    {
+        $this->sault = $sault;
     }
 
     public function jsonSerialize(): array

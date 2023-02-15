@@ -3,6 +3,7 @@
 namespace models;
 require_once 'IUserService.php';
 require_once 'User.php';
+
 class UserService implements IUserService
 {
     private array $users = [];
@@ -13,51 +14,56 @@ class UserService implements IUserService
         $this->dbName = '../database/users.json';
     }
 
-    public function getUserById(int $id){
-        if($this->getUsers()){
-            foreach($this->getUsers() as $user){
-                if($user->getId() == $id){
+    public function getUserById(int $id)
+    {
+        if ($this->getUsers()) {
+            foreach ($this->getUsers() as $user) {
+                if ($user->getId() == $id) {
                     return $user;
                 }
             }
         }
         return null;
     }
-    public function addUser(User $user){
+
+    public function addUser(User $user)
+    {
         $this->users = $this->getUsers();
-        $user->setPassword(sha1($user->getSault().$user->getPassword()));
+        $user->setPassword(sha1($user->getSault() . $user->getPassword()));
         $this->users[] = $user;
         $string = json_encode($this->users);
         $result = file_put_contents($this->dbName, $string);
-        if($result){
+        if ($result) {
             return $user;
         }
         return null;
     }
-    public function updateUser(int $id, string $login = null, string $password = null, string $email = null, string $name = null){
+
+    public function updateUser(int $id, string $login = null, string $password = null, string $email = null, string $name = null)
+    {
         $user = $this->getUserById($id);
         $result = null;
-        if($user){
-            if($login){
+        if ($user) {
+            if ($login) {
                 $user->setLogin($login);
             }
-            if($password){
+            if ($password) {
                 $user->setPassword($password);
             }
-            if($email){
+            if ($email) {
                 $user->setEmail($email);
             }
-            if($name){
+            if ($name) {
                 $user->setName($name);
             }
 
             $usersFromFile = $this->getUsers();
             $this->users = [];
-            if($usersFromFile){
-                foreach($usersFromFile as $item){
-                    if($item->getId() == $id){
+            if ($usersFromFile) {
+                foreach ($usersFromFile as $item) {
+                    if ($item->getId() == $id) {
                         $this->users[] = $user;
-                    }else{
+                    } else {
                         $this->users[] = $item;
                     }
                 }
@@ -68,20 +74,22 @@ class UserService implements IUserService
             $encodeUsers = json_encode($this->users);
             $result = file_put_contents($this->dbName, $encodeUsers);
         }
-        if($result){
+        if ($result) {
             return $user;
-        } else{
+        } else {
             return null;
         }
     }
-    public function deleteUser(int $id){
+
+    public function deleteUser(int $id)
+    {
         $usersFromFile = $this->getUsers();
         $this->users = [];
         $resutl = null;
 
-        if($usersFromFile){
-            foreach($usersFromFile as $user){
-                if($user->getId() != $id){
+        if ($usersFromFile) {
+            foreach ($usersFromFile as $user) {
+                if ($user->getId() != $id) {
                     $this->users[] = $user;
                 }
             }
@@ -90,13 +98,14 @@ class UserService implements IUserService
         }
         return $resutl;
     }
+
     public function getUsers(): array
     {
         $this->users = [];
-        if(file_get_contents($this->dbName)){
+        if (file_get_contents($this->dbName)) {
             $json = file_get_contents($this->dbName);
             $jsonDecode = json_decode($json, true);
-            foreach($jsonDecode as $person){
+            foreach ($jsonDecode as $person) {
                 $this->users[] = new User($person['id'], $person['login'], $person['password'], $person['email'], $person['name'], $person['sault']);
             }
         }
@@ -105,9 +114,9 @@ class UserService implements IUserService
 
     public function getUserByEmail(string $email)
     {
-        if($this->getUsers()){
-            foreach($this->getUsers() as $user){
-                if($user->getEmail() == $email){
+        if ($this->getUsers()) {
+            foreach ($this->getUsers() as $user) {
+                if ($user->getEmail() == $email) {
                     return $user;
                 }
             }
@@ -117,9 +126,9 @@ class UserService implements IUserService
 
     public function getUserByLogin(string $login)
     {
-        if($this->getUsers()){
-            foreach($this->getUsers() as $user){
-                if($user->getLogin() == $login){
+        if ($this->getUsers()) {
+            foreach ($this->getUsers() as $user) {
+                if ($user->getLogin() == $login) {
                     return $user;
                 }
             }

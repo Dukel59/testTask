@@ -2,9 +2,10 @@
 session_start();
 
 require_once '../models/UserService.php';
+
 use models\UserService;
 
-if ($_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest'){
+if ($_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest') {
 
     $service = new UserService();
 
@@ -12,16 +13,17 @@ if ($_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest'){
     $password = $_POST['password'];
 
     $errorFields = [];
-    $regexFromPassword = '/(\w{6,})/';
+    $regexFromLogin = '/^(\S{6,})$/';
+    $regexFromPassword = '/^(?=.*[a-z])(?=.*\d)[a-zA-Z\d]{6,}$/';
 
-    if(strlen($login) < 5){
+    if (preg_match($regexFromLogin, $login) != 1) {
         $errorFields[] = 'login';
     }
-    if(preg_match($regexFromPassword, $password) != 1){
+    if (preg_match($regexFromPassword, $password) != 1) {
         $errorFields[] = 'password';
     }
 
-    if(!empty($errorFields)){
+    if (!empty($errorFields)) {
         $response = [
             "status" => false,
             "type" => 1,
@@ -33,7 +35,7 @@ if ($_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest'){
 
     $user = $service->getUserByLogin($login);
 
-    if($user && $user->getPassword() == sha1($user->getSault().$password)){
+    if ($user && $user->getPassword() == sha1($user->getSault() . $password)) {
         $_SESSION['user'] = [
             "id" => $user->getId(),
             "userName" => $user->getName(),
@@ -42,7 +44,7 @@ if ($_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest'){
             "status" => true
         ];
 
-    } else{
+    } else {
         $response = [
             "status" => false,
             "type" => 2

@@ -19,12 +19,12 @@ if ($_SESSION['user']) {
 <div class="container">
     <form action="" id="authForm">
         <label>Login</label>
-        <input type="text" name="login" id="login" placeholder="Enter Login"><br>
-        <p class="msg-login-error none"></p>
+        <input type="text" name="login" id="login" placeholder="Enter Login">
+        <p class="msg-login-error none"></p><br>
         <label>Password</label>
-        <input type="password" name="password" id="password" placeholder="Enter password"><br>
-        <p class="msg-password-error none"></p>
-        <button id="sendAuth" type="button" name="button" class="btn btn-success">Send</button>
+        <input type="password" name="password" id="password" placeholder="Enter password">
+        <p class="msg-password-error none"></p><br>
+        <button id="sendAuth" type="button" name="button" class="btn">Send</button>
         <p><a href="registration.php">Registration</a></p>
         <p class="msg none"></p>
     </form>
